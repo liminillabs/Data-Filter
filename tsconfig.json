@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata" : true,
+        "esModuleInterop" : true,
+        "resolveJsonModule" : true
+    },
+    "lib": [
+        "dom",
+        "es6",
+        "ES2015.Promise",
+        "ES2015.Iterable"
+        
+    ],
+    "include": [
+        "src/**/*.d.ts",
+        "src/**/*.ts"
+       ],
+    "exclude": [
+        "**/*.spec.ts",
+        "node_modules"
+    ]
+
+}
