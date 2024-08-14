@@ -106,3 +106,5 @@ Once all the individual expressions have been evaluated.
 Only If ALL the expressions are true, then the set is true.
 
 **Note**: Groups of expressions and be grouped into groups.
+
+## Sorting
