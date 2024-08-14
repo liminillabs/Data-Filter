@@ -1,33 +1,64 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
+name: Publish to NPM
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm test
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Publish to NPM
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: github.ref == 'refs/heads/main' && steps.check_version.outputs.changed == 'true'
+
+      - name: Tag version
+        run: git tag v${{ steps.get_version.outputs.version }} && git push origin v${{ steps.get_version.outputs.version }}
+        if: github.ref == 'refs/heads/main' && steps.check_version.outputs.changed == 'true'
+
+  check_version:
+    name: Check version
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+      changed: ${{ steps.version_changed.outputs.changed }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get current version
+        id: get_version
+        run: echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
+
+      - name: Check if version is already tagged
+        id: version_changed
+        run: |
+          git fetch --tags
+          if [ $(git tag -l "v${{ steps.get_version.outputs.version }}") ]; then
+            echo "Version is already tagged"
+            echo "::set-output name=changed::false"
+          else
+            echo "Version is not tagged yet"
+            echo "::set-output name=changed::true"
+          fi
