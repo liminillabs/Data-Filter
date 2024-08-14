@@ -62,3 +62,4 @@ jobs:
             echo "Version is not tagged yet"
             echo "::set-output name=changed::true"
           fi
+        continue-on-error: true
