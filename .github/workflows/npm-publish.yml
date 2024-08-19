@@ -35,6 +35,9 @@ jobs:
         env:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
 
+      - name: Link the package
+        run: npm link
+
       - name: Publish to NPM
         run: npm publish --provenance --access public
         env:
