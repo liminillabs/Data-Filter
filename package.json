@@ -12,7 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/liminillabs/Data-Filter"
+    "url": "git+https://github.com/liminillabs/Data-Filter.git"
+  },
+  "publishConfig": {
+  "provenance": true
   },
   "author": "Anton de Gruchy",
   "license": "ISC",
