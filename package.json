@@ -1,7 +1,7 @@
 {
   "name": "@liminillabs/data-filter",
   "version": "1.0.1",
-  "description": "Data Filter",
+  "description": "Package that filters an array based on a logical expression and optionally sorts the result.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage  --coverageProvider=v8",
@@ -17,6 +17,7 @@
   "publishConfig": {
     "provenance": true
   },
+  "keywords": ["sort", "filter", "data", "filtering", "expressions"],
   "author": "Anton de Gruchy",
   "license": "ISC",
   "dependencies": {
