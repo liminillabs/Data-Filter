@@ -21,6 +21,9 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      - name: Add npm user
+        run: npm adduser
+
       - name: Install dependencies
         run: npm install
 
