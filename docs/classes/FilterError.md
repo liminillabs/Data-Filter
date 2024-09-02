@@ -1,4 +1,4 @@
-[@liminil/data-filter](../README.md) / [Exports](../modules.md) / FilterError
+[@antondegliminil/data-filter](../README.md) / [Exports](../modules.md) / FilterError
 
 # Class: FilterError
 
@@ -44,7 +44,7 @@ Error.constructor
 
 #### Defined in
 
-src/types/errors.types.ts:6
+[src/types/errors.types.ts:6](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/errors.types.ts#L6)
 
 ## Properties
 
@@ -121,7 +121,7 @@ Error.prepareStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:11
+node_modules/@types/node/globals.d.ts:28
 
 ___
 
@@ -135,7 +135,7 @@ Error.stackTraceLimit
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:13
+node_modules/@types/node/globals.d.ts:30
 
 ## Methods
 
@@ -162,4 +162,4 @@ Error.captureStackTrace
 
 #### Defined in
 
-node_modules/@types/node/globals.d.ts:4
+node_modules/@types/node/globals.d.ts:21

@@ -1,6 +1,6 @@
-[@liminil/data-filter](README.md) / Exports
+[@antondegliminil/data-filter](README.md) / Exports
 
-# @liminil/data-filter
+# @antondegliminil/data-filter
 
 ## Table of contents
 
@@ -12,6 +12,7 @@
 ### Interfaces
 
 - [FilterExpression](interfaces/FilterExpression.md)
+- [SortExpression](interfaces/SortExpression.md)
 
 ### Type Aliases
 
@@ -21,6 +22,7 @@
 - [ItemValue](modules.md#itemvalue)
 - [LogicalExpression](modules.md#logicalexpression)
 - [Operators](modules.md#operators)
+- [SortDirection](modules.md#sortdirection)
 
 ## Type Aliases
 
@@ -30,7 +32,7 @@
 
 #### Defined in
 
-src/types/filter.types.ts:9
+[src/types/filter.types.ts:9](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L9)
 
 ___
 
@@ -42,7 +44,7 @@ Allows both expression to be passed in a single type.
 
 #### Defined in
 
-src/types/filter.types.ts:50
+[src/types/filter.types.ts:58](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L58)
 
 ___
 
@@ -52,7 +54,7 @@ ___
 
 #### Defined in
 
-src/types/filter.types.ts:11
+[src/types/filter.types.ts:13](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L13)
 
 ___
 
@@ -62,7 +64,7 @@ ___
 
 #### Defined in
 
-src/types/filter.types.ts:13
+[src/types/filter.types.ts:15](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L15)
 
 ___
 
@@ -78,10 +80,11 @@ Defines the logic for a set of filters.
 | :------ | :------ | :------ |
 | `condition` | [`Conditions`](modules.md#conditions) | Defines how the expressions are validated as a set. |
 | `expressions` | [`Expression`](modules.md#expression)[] | A set of expressions, either [LogicalExpression](modules.md#logicalexpression) or [FilterExpression](interfaces/FilterExpression.md) |
+| `sort?` | [`SortExpression`](interfaces/SortExpression.md) | Defines how to sort the data once the filter is completed. |
 
 #### Defined in
 
-src/types/filter.types.ts:36
+[src/types/filter.types.ts:40](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L40)
 
 ___
 
@@ -91,4 +94,14 @@ ___
 
 #### Defined in
 
-src/types/filter.types.ts:5
+[src/types/filter.types.ts:5](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L5)
+
+___
+
+### SortDirection
+
+Ƭ **SortDirection**: ``"asc"`` \| ``"desc"``
+
+#### Defined in
+
+[src/types/filter.types.ts:11](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L11)

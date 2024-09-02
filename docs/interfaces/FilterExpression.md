@@ -1,4 +1,4 @@
-[@liminil/data-filter](../README.md) / [Exports](../modules.md) / FilterExpression
+[@antondegliminil/data-filter](../README.md) / [Exports](../modules.md) / FilterExpression
 
 # Interface: FilterExpression
 
@@ -9,6 +9,7 @@ Defines the logic for a single filter expression.
 ### Properties
 
 - [field](FilterExpression.md#field)
+- [id](FilterExpression.md#id)
 - [operator](FilterExpression.md#operator)
 - [value](FilterExpression.md#value)
 
@@ -22,7 +23,19 @@ Field of the item to test.
 
 #### Defined in
 
-src/types/filter.types.ts:22
+[src/types/filter.types.ts:26](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L26)
+
+___
+
+### id
+
+• **id**: `string` \| `number`
+
+ID Field
+
+#### Defined in
+
+[src/types/filter.types.ts:22](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L22)
 
 ___
 
@@ -34,7 +47,7 @@ Validation operator
 
 #### Defined in
 
-src/types/filter.types.ts:26
+[src/types/filter.types.ts:30](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L30)
 
 ___
 
@@ -46,4 +59,4 @@ Value to test against.
 
 #### Defined in
 
-src/types/filter.types.ts:30
+[src/types/filter.types.ts:34](https://github.com/liminillabs/Data-Filter/blob/214e966/src/types/filter.types.ts#L34)

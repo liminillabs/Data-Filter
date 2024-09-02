@@ -1,4 +1,4 @@
-@liminil/data-filter / [Exports](modules.md)
+@antondegliminil/data-filter / [Exports](modules.md)
 
 # Data-Filter
 
@@ -7,6 +7,8 @@ The data filter service allow for an array of data to be filtered against a set 
 The filter is designed to be used with [https://react-querybuilder.js.org/](https://react-querybuilder.js.org/) on the UX.
 
 The DataFilterService can filter an array or validate a single item.
+
+[Detailed documentation](./docs/modules.md)
 
 Example to filter an array.
 
@@ -71,13 +73,13 @@ The system will support the following operators:
 | Ends with | endsWith | Right value ends with the value of the left value. | "Freddy" ends with "dy" |
 | Does not contain | doesNotContain | Left value is not contained within right value. The opposite of contains. | "Freddy" does not contain "blue" |
 | Does not begin with | doesNotBeginWith | Right values does not start with left value. Opposite of beginsWith. |
- |
+|
 | Does not end with | doesNotEndWith | Right value does not end with left value. Opposite of endsWidth |
- |
+|
 | Null | Null | Right value equal null or undefined. |
- |
+|
 | Not null | notNull | Right value is not null or not undefined |
- |
+|
 | In | in | With left value being an array (1, 3, 5, 6) and right value being 5. Then right value is in left value. | 5 in (1,3,5,6) |
 | NotIn | notIn | With left value being an array (1,3,5,6) and right value being 4. Then right values is not in left value. | 4 not in (1,3,5,6) |
 | Between | between | With left value being (1, 10) and right value being 4. Then right value is between left values. | 4 between 1, 10 |
@@ -102,3 +104,55 @@ Once all the individual expressions have been evaluated.
 Only If ALL the expressions are true, then the set is true.
 
 **Note**: Groups of expressions and be grouped into groups.
+
+# Sorting
+
+The library provides the ability to sort an array by field name.
+
+Example to sort, that will sort people by their age.
+
+```typescript
+
+    const people = [
+            { name: 'Adam', age: 35 },
+            { name: 'Bob', age: 41 },
+            { name: 'Carl', age: 29 },
+            { name: 'Dennis', age: 52 },
+        ];
+
+    const filterService = new DataFilterService<FilterTestItem>();
+
+    const expression: SortExpression = { field: 'age', direction: 'asc' };
+
+    const sortedItems = service.sortData(expression, people);
+
+```
+
+You can also include a sort expression when filtering data.
+
+Example to filter an array. The result will be all people who are less than 40, sorted by age descending.
+
+```typescript
+
+    let filterService = new DataFilterService<FilterTestItem>();
+
+    const expression: LogicalExpression = {
+        condition: "and",
+        expressions: [{
+            field: "age",
+            operator: "<",
+            value: 40
+        }],
+        sort: { field: 'age', direction: 'asc' }
+    }
+
+    const people = [
+        { name: 'Adam', age: 35 },
+        { name: 'Bob', age: 41 },
+        { name: 'Carl', age: 29 },
+        { name: 'Dennis', age: 52 },
+    ];
+
+    let result = filterService.filterData(expression, people)
+
+```
