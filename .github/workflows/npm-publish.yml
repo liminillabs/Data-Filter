@@ -1,5 +1,9 @@
 name: Build and Publish to NPM
 
+permissions:
+  contents: read
+  pages: write
+
 on:
   push:
     branches:
@@ -29,9 +33,11 @@ jobs:
 
       - name: Update package version with build number
         run: |
-          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
-          npm version patch --no-git-tag-version
-          jq ".version += \"-$BUILD_NUMBER\"" package.json > tmp.json && mv tmp.json package.json
+          VERSION=$(jq -r ".version" package.json)
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          NEW_VERSION="$MAJOR.$MINOR.$BUILD_NUMBER"
+          jq ".version = \"$NEW_VERSION\"" package.json > tmp.json && mv tmp.json package.json
         env:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
 
