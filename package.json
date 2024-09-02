@@ -1,5 +1,5 @@
 {
-  "name": "@antondegliminil/data-filter",
+  "name": "@liminillabs/data-filter",
   "version": "1.0.1",
   "description": "Data Filter",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liminillabs/Data-Filter.git"
+    "url": "git+https://github.com/liminillabs/Data-Filter"
   },
   "publishConfig": {
     "provenance": true

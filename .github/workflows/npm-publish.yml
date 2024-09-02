@@ -1,5 +1,9 @@
 name: Build and Publish to NPM
 
+permissions:
+  contents: read
+  pages: write
+
 on:
   push:
     branches:
@@ -15,6 +19,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Update package version with build number
+        run: |
+          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
+          VERSION=$(jq -r ".version" package.json)
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          NEW_VERSION="$MAJOR.$MINOR.$BUILD_NUMBER"
+          jq ".version = \"$NEW_VERSION\"" package.json > tmp.json && mv tmp.json package.json
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -27,14 +42,6 @@ jobs:
       - name: Build the TypeScript project
         run: npm run build
 
-      - name: Update package version with build number
-        run: |
-          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
-          npm version patch --no-git-tag-version
-          jq ".version += \"-$BUILD_NUMBER\"" package.json > tmp.json && mv tmp.json package.json
-        env:
-          GITHUB_RUN_NUMBER: ${{ github.run_number }}
-
       - name: Link the package
         run: npm link
 
@@ -42,14 +49,7 @@ jobs:
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
 
-      - name: Commit updated package.json
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add package.json
-          git commit -m "chore: increment version to ${{ steps.set_version.outputs.new_version }}"
-
-      - name: Push changes
-        run: git push
-        if: success()
+      
