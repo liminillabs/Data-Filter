@@ -33,6 +33,7 @@ jobs:
 
       - name: Update package version with build number
         run: |
+          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
           VERSION=$(jq -r ".version" package.json)
           MAJOR=$(echo $VERSION | cut -d. -f1)
           MINOR=$(echo $VERSION | cut -d. -f2)
